@@ -1,0 +1,850 @@
+[
+    {
+        "id": "f79c1d3c2c126642",
+        "type": "tab",
+        "label": "Оновлення данних інвертора",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "4b2298f5fccd2cce",
+        "type": "tab",
+        "label": "Управління бойлером NEW",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "18954a9cde6d8bf2",
+        "type": "mqtt-broker",
+        "name": "Teknix",
+        "broker": "lemax-load-balancer-1957547522.us-east-2.elb.amazonaws.com",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "5",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "cmnd/tasmota_22110223150100004/SerialSend",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "INFO",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "d28dc20a0a69bd35",
+        "type": "mqtt-broker",
+        "name": "Internal",
+        "broker": "10.10.10.122",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "5",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "3e9f16b984e1e2e7",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "10.10.10.122",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "bce382e30e15362b",
+        "type": "debug",
+        "z": "f79c1d3c2c126642",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "9acf603bddc941d1",
+        "type": "http request",
+        "z": "f79c1d3c2c126642",
+        "name": "Get inverter status",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://10.10.10.60:4000/status",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 370,
+        "y": 120,
+        "wires": [
+            [
+                "bce382e30e15362b",
+                "3f1059f2a7368549"
+            ]
+        ]
+    },
+    {
+        "id": "3f1059f2a7368549",
+        "type": "mqtt out",
+        "z": "f79c1d3c2c126642",
+        "name": "",
+        "topic": "inverter/status",
+        "qos": "",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "d28dc20a0a69bd35",
+        "x": 760,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "68d0ceb3708a1d70",
+        "type": "inject",
+        "z": "f79c1d3c2c126642",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "20",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 170,
+        "y": 120,
+        "wires": [
+            [
+                "9acf603bddc941d1"
+            ]
+        ]
+    },
+    {
+        "id": "139cb6931fe79e43",
+        "type": "inject",
+        "z": "f79c1d3c2c126642",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "20",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8c39d57cab28efb0",
+        "type": "http request",
+        "z": "f79c1d3c2c126642",
+        "name": "Get hidraw device",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://10.10.10.60:7000/request?command=\"ls /dev/hidraw*\"",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "application/json",
+                "valueValue": ""
+            }
+        ],
+        "x": 250,
+        "y": 540,
+        "wires": [
+            [
+                "3b772b900a9348d1"
+            ]
+        ]
+    },
+    {
+        "id": "3b772b900a9348d1",
+        "type": "function",
+        "z": "f79c1d3c2c126642",
+        "name": "Extract hidraw device",
+        "func": "\nconst device = msg.payload.result.split(\"\\n\")[0]\n\nmsg.payload.device = device\n\nreturn msg\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 540,
+        "wires": [
+            [
+                "cea0d26474b531bc"
+            ]
+        ]
+    },
+    {
+        "id": "e5d50ee934d60299",
+        "type": "http request",
+        "z": "f79c1d3c2c126642",
+        "name": "Req",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "query",
+        "url": "http://10.10.10.60:7000/request?test=true",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "application/json",
+                "valueValue": ""
+            }
+        ],
+        "x": 890,
+        "y": 500,
+        "wires": [
+            [
+                "7af52f0144a73431"
+            ]
+        ]
+    },
+    {
+        "id": "cea0d26474b531bc",
+        "type": "function",
+        "z": "f79c1d3c2c126642",
+        "name": "Request device info",
+        "func": "msg.payload.command =`sudo /home/raspberrypi/venv/mppsolar/bin/mpp-solar -p ${msg.payload.device} -P PI30 -c QPIGS -o json`\n\nreturn msg\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 500,
+        "wires": [
+            [
+                "e5d50ee934d60299"
+            ]
+        ]
+    },
+    {
+        "id": "e9d934e0ba311a96",
+        "type": "function",
+        "z": "f79c1d3c2c126642",
+        "name": "Request generated energy total",
+        "func": "msg.payload.command = `sudo /home/raspberrypi/venv/mppsolar/bin/mpp-solar -p ${msg.payload.device} -P PI30MAX -c QET -o json`\n\nreturn msg",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 750,
+        "y": 580,
+        "wires": [
+            [
+                "979c26f373c81184"
+            ]
+        ]
+    },
+    {
+        "id": "979c26f373c81184",
+        "type": "http request",
+        "z": "f79c1d3c2c126642",
+        "name": "Req",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "query",
+        "url": "http://10.10.10.60:7000/request?test=true",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "application/json",
+                "valueValue": ""
+            }
+        ],
+        "x": 950,
+        "y": 580,
+        "wires": [
+            [
+                "30bffd12e4d1491f"
+            ]
+        ]
+    },
+    {
+        "id": "2a4834d79d768eca",
+        "type": "join",
+        "z": "f79c1d3c2c126642",
+        "name": "",
+        "mode": "custom",
+        "build": "merged",
+        "property": "parts",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "useparts": true,
+        "accumulate": false,
+        "timeout": "",
+        "count": "",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "num",
+        "reduceFixup": "",
+        "x": 1230,
+        "y": 540,
+        "wires": [
+            [
+                "e761e0d7b3e6afe8"
+            ]
+        ]
+    },
+    {
+        "id": "e761e0d7b3e6afe8",
+        "type": "debug",
+        "z": "f79c1d3c2c126642",
+        "name": "debug 9",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "parts",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1440,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "7af52f0144a73431",
+        "type": "function",
+        "z": "f79c1d3c2c126642",
+        "name": "Res",
+        "func": "msg.parts = {deviceInfo: JSON.parse(msg.payload.result)}\n\nreturn msg\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1010,
+        "y": 500,
+        "wires": [
+            [
+                "2a4834d79d768eca"
+            ]
+        ]
+    },
+    {
+        "id": "30bffd12e4d1491f",
+        "type": "function",
+        "z": "f79c1d3c2c126642",
+        "name": "Res",
+        "func": "msg.parts = {generatedEnergyTotal: JSON.parse(msg.payload.result)}\n\nreturn msg\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1090,
+        "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d3bae0129e0287b6",
+        "type": "mqtt in",
+        "z": "4b2298f5fccd2cce",
+        "name": "On Tasmota MQTT response",
+        "topic": "tele/tasmota_22110223150100004/#",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "d28dc20a0a69bd35",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 180,
+        "y": 680,
+        "wires": [
+            [
+                "cf723c38c210922b"
+            ]
+        ]
+    },
+    {
+        "id": "7aedabcf28a82405",
+        "type": "mqtt in",
+        "z": "4b2298f5fccd2cce",
+        "name": "On boiler command",
+        "topic": "boiler/command",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "d28dc20a0a69bd35",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 730,
+        "y": 240,
+        "wires": [
+            [
+                "5849547eca793fe5",
+                "f028c4c44bee6d6c",
+                "35fd0a7396e4bfee"
+            ]
+        ]
+    },
+    {
+        "id": "5849547eca793fe5",
+        "type": "mqtt out",
+        "z": "4b2298f5fccd2cce",
+        "name": "Send command to the boiler",
+        "topic": "cmnd/tasmota_22110223150100004/SerialSend",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "d28dc20a0a69bd35",
+        "x": 1260,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "cf723c38c210922b",
+        "type": "function",
+        "z": "4b2298f5fccd2cce",
+        "name": "Parse MQTT message",
+        "func": "function decodeTasmotaTelemetry(data) {\n  const prefix = \"I\";\n  const suffix = \"Z\";\n\n  // Remove prefix and suffix if present\n  if (data.startsWith(prefix) && data.endsWith(suffix)) {\n      data = data.substring(prefix.length, data.length - suffix.length);\n  }\n\n  // Split the string by `&`\n  const encodedValues = data.split('&');\n\n  // Convert the array of strings into an array of numbers\n  const decodedValues = encodedValues.map(value => Number(value));\n\n  return decodedValues;\n}\n\nconst PROPERTY_TO_INDEX_MAP = {\n  is_boiler_on: 0,\n  water_heating_status: 12,\n  boiler_water_temperature: 39,\n  boiler_water_heating_temperature_requested: 8,\n  boiler_water_heating_step: 18,\n  house_heating_status: 11,\n  house_water_temperature: 38,\n  boiler_house_heating_temperature_requested: 1,\n  boiler_house_heating_step: 19\n}\n\nlet response\n\n\nconst payload = msg.payload.SerialReceived\n\nif (! payload) {\n  response: {\n    receivedExpectedData: false\n  }\n} else {\n  const decodedValues = decodeTasmotaTelemetry(payload)\n\n\n  const receivedExpectedData = decodedValues.length > 40\n\n  if (receivedExpectedData) {\n    response = {\n      length: decodedValues.length,\n      receivedExpectedData: true,\n      \"is_boiler_on\": decodedValues[PROPERTY_TO_INDEX_MAP.is_boiler_on] === 1,\n      \"water_heating_status\": decodedValues[PROPERTY_TO_INDEX_MAP.water_heating_status] === 1,\n      \"house_heating_status\": decodedValues[PROPERTY_TO_INDEX_MAP.house_heating_status] === 1,\n      \"house_water_temperature\": decodedValues[PROPERTY_TO_INDEX_MAP.house_water_temperature]/10,\n      \"boiler_water_temperature\": decodedValues[PROPERTY_TO_INDEX_MAP.boiler_water_temperature]/10,\n      \"boiler_water_heating_temperature_requested\": decodedValues[PROPERTY_TO_INDEX_MAP.boiler_water_heating_temperature_requested],\n      \"boiler_house_heating_temperature_requested\": decodedValues[PROPERTY_TO_INDEX_MAP.boiler_house_heating_temperature_requested],\n      \"boiler_water_heating_step\": decodedValues[PROPERTY_TO_INDEX_MAP.boiler_water_heating_step],\n      \"boiler_house_heating_step\": decodedValues[PROPERTY_TO_INDEX_MAP.boiler_house_heating_step]\n    }\n  } else {\n    response = {\n      receivedExpectedData: false,\n      length: decodedValues.length,\n      decodedValues\n    }\n  }\n}\n\n\n\nreturn {payload: response};",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 680,
+        "wires": [
+            [
+                "af6b0f420f3f0c6d"
+            ]
+        ]
+    },
+    {
+        "id": "af6b0f420f3f0c6d",
+        "type": "switch",
+        "z": "4b2298f5fccd2cce",
+        "name": "",
+        "property": "payload.receivedExpectedData",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 650,
+        "y": 680,
+        "wires": [
+            [
+                "416fdb6fcfd0096d"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "416fdb6fcfd0096d",
+        "type": "mqtt out",
+        "z": "4b2298f5fccd2cce",
+        "name": "Send parsed data to HA",
+        "topic": "boiler/state",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "d28dc20a0a69bd35",
+        "x": 890,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "4cd00d6e3dd576ea",
+        "type": "inject",
+        "z": "4b2298f5fccd2cce",
+        "name": "Get Boiler status",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "INFO",
+        "payloadType": "str",
+        "x": 530,
+        "y": 120,
+        "wires": [
+            [
+                "42ec9870940ab1b4"
+            ]
+        ]
+    },
+    {
+        "id": "42ec9870940ab1b4",
+        "type": "mqtt out",
+        "z": "4b2298f5fccd2cce",
+        "name": "Send tasmota command",
+        "topic": "cmnd/tasmota_22110223150100004/SerialSend",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "d28dc20a0a69bd35",
+        "x": 750,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "f028c4c44bee6d6c",
+        "type": "delay",
+        "z": "4b2298f5fccd2cce",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1200,
+        "y": 340,
+        "wires": [
+            [
+                "cf3cdaa01c4cc4cc"
+            ]
+        ]
+    },
+    {
+        "id": "cf3cdaa01c4cc4cc",
+        "type": "function",
+        "z": "4b2298f5fccd2cce",
+        "name": "INFO command",
+        "func": "\nreturn {payload: \"INFO\"};",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1360,
+        "y": 340,
+        "wires": [
+            [
+                "8f501cc6dbedded3"
+            ]
+        ]
+    },
+    {
+        "id": "8f501cc6dbedded3",
+        "type": "mqtt out",
+        "z": "4b2298f5fccd2cce",
+        "name": "Send tasmota command",
+        "topic": "cmnd/tasmota_22110223150100004/SerialSend",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "d28dc20a0a69bd35",
+        "x": 1590,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "dccb83e1cc11e885",
+        "type": "mqtt in",
+        "z": "4b2298f5fccd2cce",
+        "name": "On boiler power step change",
+        "topic": "boiler/power_command",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "d28dc20a0a69bd35",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 180,
+        "y": 360,
+        "wires": [
+            [
+                "709851c61be40394"
+            ]
+        ]
+    },
+    {
+        "id": "709851c61be40394",
+        "type": "function",
+        "z": "4b2298f5fccd2cce",
+        "name": "Convert steps to Tasmota command",
+        "func": "const commands = [\n    [\"T190120010014Z\", \"T190220010015Z\", \"T190320010016Z\", \"T190420010017Z\", \"T190520010018Z\", \"T190620010019Z\"],\n    [\"T190120020015Z\", \"T190220020016Z\", \"T190320020017Z\", \"T190420020018Z\", \"T190520020019Z\", \"T190620020020Z\"],\n    [\"T190120030016Z\", \"T190220030017Z\", \"T190320030018Z\", \"T190420030019Z\", \"T190520030020Z\", \"T190620030021Z\"],\n    [\"T190120040017Z\", \"T190220040018Z\", \"T190320040019Z\", \"T190420040020Z\", \"T190520040021Z\", \"T190620040022Z\"],\n    [\"T190120050018Z\", \"T190220050019Z\", \"T190320050020Z\", \"T190420050021Z\", \"T190520050022Z\", \"T190620050023Z\"],\n    [\"T190120060019Z\", \"T190220060020Z\", \"T190320060021Z\", \"T190420060022Z\", \"T190520060023Z\", \"T190620060024Z\"]\n];\n\nfunction getBoilerCommand(waterStep, heatingStep) {\n    if (waterStep < 1 || waterStep > 6 || heatingStep < 1 || heatingStep > 6) {\n        throw new Error(\"Кроки мають бути від 1 до 6\");\n    }\n    \n    return commands[heatingStep - 1][waterStep - 1];\n}\n\nconst payload = msg.payload\n\nconst command = getBoilerCommand(payload.boiler_water_heating_step, payload.boiler_house_heating_step)\n\n\nreturn {\"payload\": command};",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 360,
+        "wires": [
+            [
+                "5849547eca793fe5",
+                "f028c4c44bee6d6c"
+            ]
+        ]
+    },
+    {
+        "id": "251d78b7d4192223",
+        "type": "mqtt in",
+        "z": "4b2298f5fccd2cce",
+        "name": "On boiler temperature change",
+        "topic": "boiler/temperature_command",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "d28dc20a0a69bd35",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 180,
+        "y": 500,
+        "wires": [
+            [
+                "3bdfc5a2a4012c47"
+            ]
+        ]
+    },
+    {
+        "id": "cdbf15f39922df54",
+        "type": "function",
+        "z": "4b2298f5fccd2cce",
+        "name": "Prepare water temperature command",
+        "func": "const temperatureToCommand = {\n  30: 'T09300012Z',\n  31: 'T09310013Z',\n  32: 'T09320014Z',\n  33: 'T09330015Z',\n  34: 'T09340016Z',\n  35: 'T09350017Z',\n  36: 'T09360018Z',\n  37: 'T09370019Z',\n  38: 'T09380020Z',\n  39: 'T09390021Z',\n  40: 'T09400013Z',\n  41: 'T09410014Z',\n  42: 'T09420015Z',\n  43: 'T09430016Z',\n  44: 'T09440017Z',\n  45: 'T09450018Z',\n  46: 'T09460019Z',\n  47: 'T09470020Z',\n  48: 'T09480021Z',\n  49: 'T09490022Z',\n  50: 'T09500014Z',\n  51: 'T09510015Z',\n  52: 'T09520016Z',\n  53: 'T09530017Z',\n  54: 'T09540018Z',\n  55: 'T09550019Z',\n  56: 'T09560020Z',\n  57: 'T09570021Z',\n  58: 'T09580022Z',\n  59: 'T09590023Z',\n  60: 'T09600015Z'\n}\n\n\nfunction getTemperatureCommand(temperature) {\n  if (temperatureToCommand.hasOwnProperty(temperature)) {\n    return temperatureToCommand[temperature];\n  } else {\n    return 'Invalid temperature. Please enter a temperature between 30 and 60.';\n  }\n}\n\n\nreturn {\"payload\": getTemperatureCommand(msg.payload.value)};",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 460,
+        "wires": [
+            [
+                "5849547eca793fe5",
+                "f028c4c44bee6d6c"
+            ]
+        ]
+    },
+    {
+        "id": "3bdfc5a2a4012c47",
+        "type": "switch",
+        "z": "4b2298f5fccd2cce",
+        "name": "",
+        "property": "payload.type",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "input_number.boiler_water_heating_temperature_requested",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "input_number.boiler_house_heating_temperature_requested",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 390,
+        "y": 500,
+        "wires": [
+            [
+                "cdbf15f39922df54"
+            ],
+            [
+                "d72753e46859d389"
+            ]
+        ]
+    },
+    {
+        "id": "d72753e46859d389",
+        "type": "function",
+        "z": "4b2298f5fccd2cce",
+        "name": "Prepare house temperature command",
+        "func": "const temperatureToCommand = {\n  30: 'T02300005Z',\n  31: 'T02310006Z',\n  32: 'T02320007Z',\n  33: 'T02330008Z',\n  34: 'T02340009Z',\n  35: 'T0235000AZ',\n  36: 'T0236000BZ',\n  37: 'T02370012Z',\n  38: 'T02380013Z',\n  39: 'T02390014Z',\n  40: 'T02400006Z',\n  41: 'T02410007Z',\n  42: 'T02420008Z',\n  43: 'T02430009Z',\n  44: 'T02440010Z',\n  45: 'T02450011Z',\n  46: 'T02460012Z',\n  47: 'T02470013Z',\n  48: 'T02480014Z',\n  49: 'T02490015Z',\n  50: 'T02500007Z',\n  51: 'T02510008Z',\n  52: 'T02520009Z',\n  53: 'T02540010Z',\n  54: 'T02540011Z',\n  55: 'T02550012Z',\n  56: 'T02560013Z',\n  57: 'T02570014Z',\n  58: 'T02580015Z',\n  59: 'T02590016Z',\n  60: 'T02600008Z',\n  61: 'T02610009Z',\n  62: 'T02620010Z',\n  63: 'T02630011Z',\n  64: 'T02640012Z',\n  65: 'T02650013Z',\n  66: 'T02660014Z',\n  67: 'T02670015Z',\n  68: 'T02680016Z',\n  69: 'T02690017Z',\n  70: 'T02700009Z',\n  71: 'T02710010Z',\n  72: 'T02720011Z',\n  73: 'T02730012Z',\n  74: 'T02740013Z',\n  75: 'T02750014Z',\n  76: 'T02760015Z',\n  77: 'T02770016Z',\n  78: 'T02780017Z',\n  79: 'T02790018Z',\n  80: 'T02800010Z',\n}\n\nfunction getTemperatureCommand(temperature) {\n  if (temperatureToCommand.hasOwnProperty(temperature)) {\n    return temperatureToCommand[temperature];\n  } else {\n    return 'Invalid temperature. Please enter a temperature between 30 and 80.';\n  }\n}\n\nreturn {\"payload\": getTemperatureCommand(msg.payload.value)}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 540,
+        "wires": [
+            [
+                "5849547eca793fe5",
+                "f028c4c44bee6d6c"
+            ]
+        ]
+    },
+    {
+        "id": "35fd0a7396e4bfee",
+        "type": "debug",
+        "z": "4b2298f5fccd2cce",
+        "name": "debug 10",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 940,
+        "y": 180,
+        "wires": []
+    }
+]
