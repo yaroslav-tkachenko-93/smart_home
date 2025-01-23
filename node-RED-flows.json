@@ -1,464 +1,11 @@
 [
     {
-        "id": "f79c1d3c2c126642",
-        "type": "tab",
-        "label": "Оновлення данних інвертора",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
         "id": "4b2298f5fccd2cce",
         "type": "tab",
         "label": "Управління бойлером NEW",
         "disabled": false,
         "info": "",
         "env": []
-    },
-    {
-        "id": "18954a9cde6d8bf2",
-        "type": "mqtt-broker",
-        "name": "Teknix",
-        "broker": "lemax-load-balancer-1957547522.us-east-2.elb.amazonaws.com",
-        "port": "1883",
-        "clientid": "",
-        "autoConnect": true,
-        "usetls": false,
-        "protocolVersion": "5",
-        "keepalive": "60",
-        "cleansession": true,
-        "autoUnsubscribe": true,
-        "birthTopic": "cmnd/tasmota_22110223150100004/SerialSend",
-        "birthQos": "0",
-        "birthRetain": "false",
-        "birthPayload": "INFO",
-        "birthMsg": {},
-        "closeTopic": "",
-        "closeQos": "0",
-        "closeRetain": "false",
-        "closePayload": "",
-        "closeMsg": {},
-        "willTopic": "",
-        "willQos": "0",
-        "willRetain": "false",
-        "willPayload": "",
-        "willMsg": {},
-        "userProps": "",
-        "sessionExpiry": ""
-    },
-    {
-        "id": "d28dc20a0a69bd35",
-        "type": "mqtt-broker",
-        "name": "Internal",
-        "broker": "10.10.10.122",
-        "port": "1883",
-        "clientid": "",
-        "autoConnect": true,
-        "usetls": false,
-        "protocolVersion": "5",
-        "keepalive": "60",
-        "cleansession": true,
-        "autoUnsubscribe": true,
-        "birthTopic": "",
-        "birthQos": "0",
-        "birthRetain": "false",
-        "birthPayload": "",
-        "birthMsg": {},
-        "closeTopic": "",
-        "closeQos": "0",
-        "closeRetain": "false",
-        "closePayload": "",
-        "closeMsg": {},
-        "willTopic": "",
-        "willQos": "0",
-        "willRetain": "false",
-        "willPayload": "",
-        "willMsg": {},
-        "userProps": "",
-        "sessionExpiry": ""
-    },
-    {
-        "id": "3e9f16b984e1e2e7",
-        "type": "mqtt-broker",
-        "name": "",
-        "broker": "10.10.10.122",
-        "port": "1883",
-        "clientid": "",
-        "autoConnect": true,
-        "usetls": false,
-        "protocolVersion": "4",
-        "keepalive": "60",
-        "cleansession": true,
-        "autoUnsubscribe": true,
-        "birthTopic": "",
-        "birthQos": "0",
-        "birthRetain": "false",
-        "birthPayload": "",
-        "birthMsg": {},
-        "closeTopic": "",
-        "closeQos": "0",
-        "closeRetain": "false",
-        "closePayload": "",
-        "closeMsg": {},
-        "willTopic": "",
-        "willQos": "0",
-        "willRetain": "false",
-        "willPayload": "",
-        "willMsg": {},
-        "userProps": "",
-        "sessionExpiry": ""
-    },
-    {
-        "id": "bce382e30e15362b",
-        "type": "debug",
-        "z": "f79c1d3c2c126642",
-        "name": "debug 6",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 600,
-        "y": 240,
-        "wires": []
-    },
-    {
-        "id": "9acf603bddc941d1",
-        "type": "http request",
-        "z": "f79c1d3c2c126642",
-        "name": "Get inverter status",
-        "method": "GET",
-        "ret": "obj",
-        "paytoqs": "ignore",
-        "url": "http://10.10.10.60:4000/status",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [],
-        "x": 370,
-        "y": 120,
-        "wires": [
-            [
-                "bce382e30e15362b",
-                "3f1059f2a7368549"
-            ]
-        ]
-    },
-    {
-        "id": "3f1059f2a7368549",
-        "type": "mqtt out",
-        "z": "f79c1d3c2c126642",
-        "name": "",
-        "topic": "inverter/status",
-        "qos": "",
-        "retain": "true",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "d28dc20a0a69bd35",
-        "x": 760,
-        "y": 120,
-        "wires": []
-    },
-    {
-        "id": "68d0ceb3708a1d70",
-        "type": "inject",
-        "z": "f79c1d3c2c126642",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "20",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 170,
-        "y": 120,
-        "wires": [
-            [
-                "9acf603bddc941d1"
-            ]
-        ]
-    },
-    {
-        "id": "139cb6931fe79e43",
-        "type": "inject",
-        "z": "f79c1d3c2c126642",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "20",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 110,
-        "y": 500,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "8c39d57cab28efb0",
-        "type": "http request",
-        "z": "f79c1d3c2c126642",
-        "name": "Get hidraw device",
-        "method": "GET",
-        "ret": "obj",
-        "paytoqs": "ignore",
-        "url": "http://10.10.10.60:7000/request?command=\"ls /dev/hidraw*\"",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [
-            {
-                "keyType": "Content-Type",
-                "keyValue": "",
-                "valueType": "application/json",
-                "valueValue": ""
-            }
-        ],
-        "x": 250,
-        "y": 540,
-        "wires": [
-            [
-                "3b772b900a9348d1"
-            ]
-        ]
-    },
-    {
-        "id": "3b772b900a9348d1",
-        "type": "function",
-        "z": "f79c1d3c2c126642",
-        "name": "Extract hidraw device",
-        "func": "\nconst device = msg.payload.result.split(\"\\n\")[0]\n\nmsg.payload.device = device\n\nreturn msg\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 480,
-        "y": 540,
-        "wires": [
-            [
-                "cea0d26474b531bc"
-            ]
-        ]
-    },
-    {
-        "id": "e5d50ee934d60299",
-        "type": "http request",
-        "z": "f79c1d3c2c126642",
-        "name": "Req",
-        "method": "POST",
-        "ret": "obj",
-        "paytoqs": "query",
-        "url": "http://10.10.10.60:7000/request?test=true",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [
-            {
-                "keyType": "Content-Type",
-                "keyValue": "",
-                "valueType": "application/json",
-                "valueValue": ""
-            }
-        ],
-        "x": 890,
-        "y": 500,
-        "wires": [
-            [
-                "7af52f0144a73431"
-            ]
-        ]
-    },
-    {
-        "id": "cea0d26474b531bc",
-        "type": "function",
-        "z": "f79c1d3c2c126642",
-        "name": "Request device info",
-        "func": "msg.payload.command =`sudo /home/raspberrypi/venv/mppsolar/bin/mpp-solar -p ${msg.payload.device} -P PI30 -c QPIGS -o json`\n\nreturn msg\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 720,
-        "y": 500,
-        "wires": [
-            [
-                "e5d50ee934d60299"
-            ]
-        ]
-    },
-    {
-        "id": "e9d934e0ba311a96",
-        "type": "function",
-        "z": "f79c1d3c2c126642",
-        "name": "Request generated energy total",
-        "func": "msg.payload.command = `sudo /home/raspberrypi/venv/mppsolar/bin/mpp-solar -p ${msg.payload.device} -P PI30MAX -c QET -o json`\n\nreturn msg",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 750,
-        "y": 580,
-        "wires": [
-            [
-                "979c26f373c81184"
-            ]
-        ]
-    },
-    {
-        "id": "979c26f373c81184",
-        "type": "http request",
-        "z": "f79c1d3c2c126642",
-        "name": "Req",
-        "method": "POST",
-        "ret": "obj",
-        "paytoqs": "query",
-        "url": "http://10.10.10.60:7000/request?test=true",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [
-            {
-                "keyType": "Content-Type",
-                "keyValue": "",
-                "valueType": "application/json",
-                "valueValue": ""
-            }
-        ],
-        "x": 950,
-        "y": 580,
-        "wires": [
-            [
-                "30bffd12e4d1491f"
-            ]
-        ]
-    },
-    {
-        "id": "2a4834d79d768eca",
-        "type": "join",
-        "z": "f79c1d3c2c126642",
-        "name": "",
-        "mode": "custom",
-        "build": "merged",
-        "property": "parts",
-        "propertyType": "msg",
-        "key": "topic",
-        "joiner": "\\n",
-        "joinerType": "str",
-        "useparts": true,
-        "accumulate": false,
-        "timeout": "",
-        "count": "",
-        "reduceRight": false,
-        "reduceExp": "",
-        "reduceInit": "",
-        "reduceInitType": "num",
-        "reduceFixup": "",
-        "x": 1230,
-        "y": 540,
-        "wires": [
-            [
-                "e761e0d7b3e6afe8"
-            ]
-        ]
-    },
-    {
-        "id": "e761e0d7b3e6afe8",
-        "type": "debug",
-        "z": "f79c1d3c2c126642",
-        "name": "debug 9",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "parts",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1440,
-        "y": 520,
-        "wires": []
-    },
-    {
-        "id": "7af52f0144a73431",
-        "type": "function",
-        "z": "f79c1d3c2c126642",
-        "name": "Res",
-        "func": "msg.parts = {deviceInfo: JSON.parse(msg.payload.result)}\n\nreturn msg\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1010,
-        "y": 500,
-        "wires": [
-            [
-                "2a4834d79d768eca"
-            ]
-        ]
-    },
-    {
-        "id": "30bffd12e4d1491f",
-        "type": "function",
-        "z": "f79c1d3c2c126642",
-        "name": "Res",
-        "func": "msg.parts = {generatedEnergyTotal: JSON.parse(msg.payload.result)}\n\nreturn msg\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1090,
-        "y": 580,
-        "wires": [
-            []
-        ]
     },
     {
         "id": "d3bae0129e0287b6",
@@ -564,7 +111,8 @@
         "y": 680,
         "wires": [
             [
-                "416fdb6fcfd0096d"
+                "416fdb6fcfd0096d",
+                "a1a9951c4870beb8"
             ],
             []
         ]
@@ -846,5 +394,52 @@
         "x": 940,
         "y": 180,
         "wires": []
+    },
+    {
+        "id": "a1a9951c4870beb8",
+        "type": "debug",
+        "z": "4b2298f5fccd2cce",
+        "name": "debug 11",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 940,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "d28dc20a0a69bd35",
+        "type": "mqtt-broker",
+        "name": "Internal",
+        "broker": "10.10.10.77",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "5",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
     }
 ]
